@@ -3,7 +3,7 @@ chrome.contextMenus.create({
     onclick: function (info, tab) {
         $.ajax({
             url: 'http://127.0.0.1:4000',
-            type: 'POST',
+            type: 'GET',
             data: tab.url,
             cache: false
         });
