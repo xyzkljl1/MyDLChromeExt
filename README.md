@@ -1,2 +1,2 @@
-# YoutubeDLChromeExt
-Chrome add-on,sending url to local port.
+# MyDLChromeExt
+Chrome add-on,sending url and cookie to local port.
