@@ -8,7 +8,6 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
     switch (info.menuItemId) {
         case "MYDLEXTDownload":
-            console.log("1");
             fetch(tab.url, {
                 method: 'HEAD',
                 headers: { 'Cache-Control': 'no-cache' }
@@ -21,7 +20,7 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
                                 if (cookie.name == "csrftoken" || cookie.name == "sessionid")//nhentai
                                     ret += cookie.name + "=" + cookie.value + "; ";
                             //console.log(ret);
-                            fetch('http://127.0.0.1:4000/?'+'url='+tab.url+"&"+"cookie="+ret, {
+                            fetch('http://127.0.0.1:4000/?' + 'url=' + tab.url + "&" + "cookie=" + ret, {
                                 method: 'GET',
                                 headers: { 'Cache-Control': 'no-cache' }
                             }).then(res => res.text()).then(function (result) {
