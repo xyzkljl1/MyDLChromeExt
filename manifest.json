@@ -1,15 +1,14 @@
 {
-  // 清单文件的版本，这个必须写，而且必须是2
-  "manifest_version": 2,
+  "manifest_version": 3,
   // 插件的名称
   "name": "MyDLChromeExt",
   // 插件的版本
-  "version": "1.0.0",
+  "version": "1.0.1",
   // 插件描述
   "description": "MyDLChromeExt",
   // 会一直常驻的后台JS或后台页面
   "background": {
-    "page": "background.html"
+    "service_worker": "background.js"
   },
   "icons": {
     "16": "icon/logo.png",
@@ -19,9 +18,10 @@
   // 权限申请
   "permissions": [
     "cookies",
-    "webRequest", // web请求
-    "webRequestBlocking", // 阻塞式web请求
-    "contextMenus",
+    "webRequest",
+    "contextMenus"
+  ],
+  "host_permissions": [
     "<all_urls>"
   ]
 }
