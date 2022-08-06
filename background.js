@@ -33,7 +33,8 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
             if (cookie.name == "csrftoken" || cookie.name == "sessionid" || cookie.name == "cf_clearance")//nhentai
                 cookie_str += cookie.name + "=" + cookie.value + ";";
         //send to local server
-        var res=await fetch('http://127.0.0.1:4000/?' + 'url=' + encodeURIComponent(tab.url) + "&cookie=" + encodeURIComponent(cookie_str)+"&useragent="+encodeURIComponent(navigator.userAgent), {
+        //fetch request has user-agent header,no need to pass in path.
+        var res=await fetch('http://127.0.0.1:4000/?' + 'url=' + encodeURIComponent(tab.url) + "&cookie=" + encodeURIComponent(cookie_str), {
                 method: 'GET',
                 headers: { 'Cache-Control': 'no-cache' }
             });
