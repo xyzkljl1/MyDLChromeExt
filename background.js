@@ -27,7 +27,9 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
     //console.log(head_res)
     try
     {
-        var cookies=await chrome.cookies.getAll({ "url": tab.url });
+        // .to和.net内容完全一样，但是用nhentai.to获取不到cookie导致后端下载失败
+        var url = tab.url.replace('nhentai.to','nhentai.net');
+        var cookies=await chrome.cookies.getAll({ "url": url });
         var cookie_str = "";
         for (let cookie of cookies)
             if (cookie.name == "csrftoken" || cookie.name == "sessionid" || cookie.name == "cf_clearance")//nhentai
