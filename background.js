@@ -27,8 +27,9 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
     //console.log(head_res)
     try
     {
-        // .to和.net内容完全一样，但是用nhentai.to获取不到cookie导致后端下载失败
-        var url = tab.url.replace('nhentai.to','nhentai.net');
+        // .website/.to和.net内容完全一样，但是用nhentai.to获取不到cookie导致后端下载失败
+        var url = tab.url.replace('nhentai.to', 'nhentai.net');
+        url = tab.url.replace('nhentai.website', 'nhentai.net');
         var cookies=await chrome.cookies.getAll({ "url": url });
         var cookie_str = "";
         for (let cookie of cookies)
@@ -36,12 +37,12 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
                 cookie_str += cookie.name + "=" + cookie.value + ";";
         //send to local server
         //fetch request has user-agent header,no need to pass in path.
-        var res=await fetch('http://127.0.0.1:4000/?' + 'url=' + encodeURIComponent(tab.url) + "&cookie=" + encodeURIComponent(cookie_str), {
+        var res = await fetch('http://127.0.0.1:4000/?' + 'url=' + encodeURIComponent(url) + "&cookie=" + encodeURIComponent(cookie_str), {
                 method: 'GET',
                 headers: { 'Cache-Control': 'no-cache' }
             });
         Notify(tab.id,res.ok?'Done.':'Fail.',res.ok?'success':'error');
-        console.log((res.ok?"Done ":"Fail ") + tab.url);
+        console.log((res.ok ? "Done " : "Fail ") + url);
     }
     catch (err){Notify
         Notify(tab.id,'Fail:'+err,'error');
